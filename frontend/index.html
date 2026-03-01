@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TICKR</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <section class="stack">
+        <p class="word first" style="--i:0">TICKR</p>
+        <p class="word" style="--i:1">TICKR</p>
+        <p class="word" style="--i:2">TICKR</p>
+        <p class="word" style="--i:3">TICKR</p>
+        <p class="word" style="--i:4">TICKR</p>
+        <p class="word" style="--i:5">TICKR</p>
+        <p class="word" style="--i:6">TICKR</p>
+        <p class="word" style="--i:7">TICKR</p>
+      </section>
+
+      <p class="tagline">TICKETING MADE EASY</p>
+    </main>
+
+    <script>
+      const FRAME2_DELAY_MS = 800;
+      const FRAME3_DELAY_MS = 1800;
+
+      setTimeout(() => document.body.classList.add("to-frame-2"), FRAME2_DELAY_MS);
+      setTimeout(() => document.body.classList.add("to-frame-3"), FRAME2_DELAY_MS + FRAME3_DELAY_MS);
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
