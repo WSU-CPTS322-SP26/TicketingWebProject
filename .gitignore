@@ -1,23 +1,14 @@
-# IDE
+# ide
 .vscode/
 .idea/
 *.iml
-
-# dependencies
-node_modules/
-.pnp
-.pnp.js
 
 # env
 .env
 .env.*
 *.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
-# OS
+# os
 .DS_Store
 Thumbs.db
 
@@ -34,6 +25,7 @@ dist/
 out/
 target/
 coverage/
+node_modules/
 
 # temp
 *.tmp
@@ -46,9 +38,9 @@ coverage/
 *.class
 *.jar
 *.war
+*.zip
 
 # archives
-*.zip
 *.tar
 *.gz
 *.rar

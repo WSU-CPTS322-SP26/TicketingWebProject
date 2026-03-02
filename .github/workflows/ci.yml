@@ -24,6 +24,7 @@ jobs:
   backend-ci:
     runs-on: ubuntu-latest
     needs: comment-check
+    environment: Production
     env:
       SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
       SUPABASE_DB_USERNAME: ${{ secrets.SUPABASE_DB_USERNAME }}
