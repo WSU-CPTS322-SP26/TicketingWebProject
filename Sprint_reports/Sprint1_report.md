@@ -3,8 +3,8 @@
 ## What's New (User Facing)
 
 - Built the whole UI and navigation
-- Connected Supabase database
-- Spring Boot API for ticket system
+- Hooked up Supabase database
+- Spring Boot API for ticket stuff
 - Database schema for events and seats
 
 ## Work Summary
@@ -19,18 +19,18 @@ Issue #6 and #7 - Frontend and backend aren't connected yet. We need CORS setup 
 
 ## Completed
 
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/8
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/1
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/5
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/4
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/11
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/2
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/9
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/8 - Add JDBC Configuration for Supabase Data Access
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/1 - Unable to connect to Supabase PostgreSQL Instance
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/5 - Add README Documentation for Project Structure
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/4 - Populate frontend/ with required React framework and libs
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/11 - Debug frontend-ci and backend-ci failed tests
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/2 - Populate secrets in Github for CI Pipeline
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/9 - Rename "backend" and "frontend" branches to allow nested development branches
 
 ## Not Done
 
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/6 - Frontend API setup blocked by CORS stuff
-- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/7 - Environment variables and endpoint testing still needs work
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/6 - Configure Test API Endpoints for Frontend Development (blocked by CORS stuff)
+- https://github.com/WSU-CPTS322-SP26/TicketingWebProject/issues/7 - Establish Initial Frontend-Backend Connection (environment variables and endpoint testing still needs work)
 
 ## Code to Review
 
