@@ -34,6 +34,11 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
+      - name: Verify secrets
+        run: |
+          echo "SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}"
+          echo "SUPABASE_DB_USERNAME: ${{ secrets.SUPABASE_DB_USERNAME }}"
+          echo "SUPABASE_DB_PASSWORD: [MASKED]"
       - name: Build and test (Maven)
         run: cd backend && ./mvnw -B clean test
 
