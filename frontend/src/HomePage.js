@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './HomePage.css';
 
-// Import your movie images - make sure these are in the public folder
 const movies = [
   {
     id: 1,
     title: 'CRIME 101',
-    description: 'A master thief and an insurance broker join forces for a big heist, while a determined detective pursues them to prevent the multi-million-dollar crime.',
+    description: 'A master thief and an insurance broker join forces for a big heist, while a determined detective pursues them to prevent the multi-million dollar crime.',
     image: '/crime101.jpg'
   },
   {
@@ -42,43 +41,64 @@ const movies = [
 ];
 
 const HomePage = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const scroll = (direction) => {
     const container = document.querySelector('.movies-scroll');
-    const scrollAmount = 790; // Width of one card + gap
+    const scrollAmount = 790;
     
     if (direction === 'next') {
       container.scrollLeft += scrollAmount;
-      setScrollPosition(container.scrollLeft + scrollAmount);
     } else {
       container.scrollLeft -= scrollAmount;
-      setScrollPosition(container.scrollLeft - scrollAmount);
     }
+  };
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    console.log('Signing in with:', email, password);
+    setShowSignIn(false);
   };
 
   return (
     <div className="frame">
+      {/* Navbar */}
       <div className="navbar">
-        <div className="nav-content">
-          <div className="nav-left">
-            <a href="#offers">Offers & Promotions</a>
-            <a href="#movies">Movies</a>
-          </div>
-          
-          <div className="nav-center">
-            <h1>Tickr</h1>
-          </div>
-          
-          <div className="nav-right">
-            <a href="#bookings">Private Bookings</a>
-            <a href="#locations">Locations</a>
-            <button className="search-btn">🔍</button>
-            <button className="menu-btn">☰</button>
-          </div>
+        <div className="offers-promotions">Offers & Promotions</div>
+        <div className="text-wrapper-2">Movies</div>
+        <div className="text-wrapper">Tickr</div>
+        <div className="text-wrapper-3">Private Bookings</div>
+        <div className="text-wrapper-4">Locations</div>
+        
+        {/* User Icon */}
+        <div className="black-male-user" onClick={() => setShowSignIn(true)}>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="4" stroke="white" strokeWidth="2"/>
+            <path d="M4 20C4 16.6863 6.68629 14 10 14H14C17.3137 14 20 16.6863 20 20" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </div>
+
+        {/* Search Icon */}
+        <div className="vector">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="6" stroke="white" strokeWidth="2"/>
+            <path d="M20 20L17 17" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </div>
+
+        {/* Menu Icon */}
+        <div className="group-2">
+          <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="1" x2="15" y2="1" stroke="white" strokeWidth="2"/>
+            <line x1="0" y1="7" x2="15" y2="7" stroke="white" strokeWidth="2"/>
+            <line x1="0" y1="13" x2="15" y2="13" stroke="white" strokeWidth="2"/>
+          </svg>
         </div>
       </div>
 
+      {/* Movies Container */}
       <div className="movies-container">
         <button className="scroll-btn prev" onClick={() => scroll('prev')}>‹</button>
         
@@ -87,8 +107,12 @@ const HomePage = () => {
             <div key={movie.id} className="movie-card-figma">
               <img src={movie.image} alt={movie.title} className="movie-image" />
               <div className="movie-overlay">
-                <h2>{movie.title}</h2>
-                <p>{movie.description}</p>
+                <h2 className="movie-title">{movie.title}</h2>
+                <p className="movie-description">{movie.description}</p>
+                <div className="book-now-group">
+                  <div className="book-now-rectangle" />
+                  <div className="book-now-text">BOOK NOW</div>
+                </div>
               </div>
             </div>
           ))}
@@ -96,6 +120,36 @@ const HomePage = () => {
 
         <button className="scroll-btn next" onClick={() => scroll('next')}>›</button>
       </div>
+
+      {/* Sign In Modal */}
+      {showSignIn && (
+        <div className="signin-overlay" onClick={() => setShowSignIn(false)}>
+          <div className="signin-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>SIGN IN</h2>
+            <form onSubmit={handleSignIn}>
+              <div className="input-group">
+                <label>EMAIL</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="input-group">
+                <label>PASSWORD</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="signin-btn">SIGN IN</button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
