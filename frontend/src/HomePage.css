@@ -1,93 +1,153 @@
-@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Inria+Sans&display=swap');
 
+/* Frame Container */
 .frame {
   background-color: #00020f;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 62px;
+  min-height: 1024px;
   width: 100%;
   overflow-x: hidden;
-  font-family: "Times New Roman", Times, serif;
 }
 
-/* NAVBAR */
+/* Navbar */
 .navbar {
-  background: rgba(89, 89, 89, 0.3);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #595959;
+  border: 1px solid #ffffff1a;
+  border-radius: 2px;
   height: 77px;
-  width: 100%;
+  overflow: visible;
   position: relative;
+  width: 100%;
+  min-width: 1440px;
 }
 
-.nav-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  padding: 0 60px;
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-.nav-left,
-.nav-right {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  flex: 1;
-}
-
-.nav-left {
-  justify-content: flex-start;
-}
-
-.nav-right {
-  justify-content: flex-end;
-}
-
-.nav-center h1 {
-  font-family: 'Abhaya Libre', serif;
+.text-wrapper {
+  color: #ffffff;
+  font-family: "Abhaya Libre", Helvetica, serif;
   font-size: 56px;
   font-weight: 800;
-  color: #ffffff;
-  margin: 0;
   letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8px;
 }
 
-.navbar a {
-  font-family: 'Abhaya Libre', serif;
+.offers-promotions {
+  color: #ffffff;
+  font-family: "Abhaya Libre", Helvetica, serif;
   font-size: 20px;
   font-weight: 800;
-  color: #ffffff;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: opacity 0.3s;
-}
-
-.navbar a:hover {
-  opacity: 0.7;
-}
-
-.search-btn,
-.menu-btn {
-  background: none;
-  border: none;
-  color: #ffffff;
-  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 31px;
+  left: 310px;
   cursor: pointer;
-  padding: 8px;
   transition: opacity 0.3s;
+  white-space: nowrap;
 }
 
-.search-btn:hover,
-.menu-btn:hover {
+.text-wrapper-2 {
+  color: #ffffff;
+  font-family: "Abhaya Libre", Helvetica, serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 31px;
+  left: 543px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.text-wrapper-3 {
+  color: #ffffff;
+  font-family: "Abhaya Libre", Helvetica, serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 31px;
+  right: 375px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.text-wrapper-4 {
+  color: #ffffff;
+  font-family: "Abhaya Libre", Helvetica, serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 31px;
+  right: 215px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.offers-promotions:hover,
+.text-wrapper-2:hover,
+.text-wrapper-3:hover,
+.text-wrapper-4:hover {
   opacity: 0.7;
 }
 
-/* MOVIES SECTION */
+.black-male-user {
+  height: 19px;
+  position: absolute;
+  top: 31px;
+  right: 125px;
+  width: 19px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.black-male-user:hover {
+  opacity: 0.7;
+}
+
+.vector {
+  position: absolute;
+  right: 75px;
+  top: 29px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.vector:hover {
+  opacity: 0.7;
+}
+
+.group-2 {
+  height: 14px;
+  position: absolute;
+  top: 33px;
+  right: 33px;
+  width: 15px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.group-2:hover {
+  opacity: 0.7;
+}
+/* Movies Container */
 .movies-container {
   position: relative;
-  padding: 64px 0;
-  max-width: 1440px;
-  margin: 0 auto;
+  padding: 0 40px;
+  margin-top: 0;
 }
 
 .movies-scroll {
@@ -95,16 +155,16 @@
   gap: 94px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 0 60px;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  padding: 0 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .movies-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
-/* MOVIE CARDS */
+/* Movie Cards */
 .movie-card-figma {
   min-width: 696px;
   height: 450px;
@@ -129,31 +189,71 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 40px 30px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+  padding: 40px 30px 30px 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
   color: #ffffff;
 }
 
-.movie-overlay h2 {
-  font-family: 'Abhaya Libre', 'Times New Roman', serif;
+.movie-title {
+  color: #ffffff;
+  font-family: "Abhaya Libre", Helvetica, serif;
   font-size: 48px;
   font-weight: 800;
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
   letter-spacing: 0.05em;
   line-height: 1.2;
   text-transform: uppercase;
 }
 
-.movie-overlay p {
-  font-family: 'Actor', sans-serif;
+.movie-description {
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  margin: 0;
+  margin: 0 0 20px 0;
   max-width: 520px;
 }
 
-/* SCROLL BUTTONS */
+/* Book Now Button */
+.book-now-group {
+  position: relative;
+  height: 58px;
+  width: 138px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  margin-top: 10px;
+}
+
+.book-now-group:hover {
+  transform: scale(1.05);
+}
+
+.book-now-rectangle {
+  background-color: #d1c600;
+  border-radius: 38px;
+  height: 58px;
+  width: 138px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.book-now-text {
+  color: #000000;
+  font-family: "Inria Sans", Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: normal;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+/* Scroll Buttons */
 .scroll-btn {
   position: absolute;
   top: 50%;
@@ -186,39 +286,157 @@
   transform: translateY(-50%) scale(1.1);
 }
 
-/* RESPONSIVE */
-@media (max-width: 1200px) {
-  .movie-card-figma {
-    min-width: 600px;
-    height: 400px;
+/* Sign In Modal Overlay */
+.signin-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .movie-overlay h2 {
-    font-size: 40px;
-  }
-  
-  .nav-content {
-    padding: 0 30px;
+  to {
+    opacity: 1;
   }
 }
 
-@media (max-width: 768px) {
-  .movie-card-figma {
-    min-width: 90vw;
-    height: 350px;
+/* Sign In Modal */
+.signin-modal {
+  background: rgba(10, 10, 30, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 60px 80px;
+  width: 90%;
+  max-width: 500px;
+  backdrop-filter: blur(20px);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
   }
-  
-  .movies-scroll {
-    gap: 30px;
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.signin-modal h2 {
+  font-family: 'Abhaya Libre', serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 40px 0;
+  letter-spacing: 0.1em;
+}
+
+.input-group {
+  margin-bottom: 30px;
+}
+
+.input-group label {
+  display: block;
+  font-family: 'Abhaya Libre', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  transition: all 0.3s;
+}
+
+.input-group input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.signin-btn {
+  width: 100%;
+  padding: 15px;
+  background: rgba(200, 200, 220, 0.6);
+  border: none;
+  border-radius: 10px;
+  color: #000000;
+  font-family: 'Abhaya Libre', serif;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 20px;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+}
+
+.signin-btn:hover {
+  background: rgba(220, 220, 240, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1440px) {
+  .navbar {
     padding: 0 20px;
   }
   
-  .nav-left,
-  .nav-right {
-    gap: 20px;
+  .offers-promotions {
+    left: 20px;
   }
   
-  .navbar a {
-    font-size: 16px;
+  .text-wrapper-2 {
+    left: 250px;
+  }
+  
+  .text-wrapper-3 {
+    right: 220px;
+    left: auto;
+  }
+  
+  .text-wrapper-4 {
+    right: 80px;
+    left: auto;
+  }
+  
+  .black-male-user {
+    right: 50px;
+    left: auto;
+  }
+  
+  .vector {
+    right: 30px;
+    left: auto;
+  }
+  
+  .group-2 {
+    right: 10px;
+    left: auto;
   }
 }
