@@ -121,7 +121,6 @@ const HomePage = () => {
         <button className="scroll-btn next" onClick={() => scroll('next')}>›</button>
       </div>
 
-<<<<<<< HEAD
       {/* Offers & Promotions Section */}
       <div className="offers-section">
         <h2 className="section-title">OFFERS & PROMOTIONS</h2>
@@ -193,8 +192,6 @@ const HomePage = () => {
         </div>
       </footer>
 
-=======
->>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
       {/* Sign In Modal */}
       {showSignIn && (
         <div className="signin-overlay" onClick={() => setShowSignIn(false)}>
