@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Inria+Sans:wght@400;700&display=swap');
+=======
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Inria+Sans&display=swap');
+>>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
 
 /* Frame Container */
 .frame {
@@ -120,8 +124,13 @@
 
 .vector {
   position: absolute;
+<<<<<<< HEAD
   right: 80px;
   top: 28px;
+=======
+  right: 75px;
+  top: 29px;
+>>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
   cursor: pointer;
   transition: opacity 0.3s;
 }
@@ -143,7 +152,10 @@
 .group-2:hover {
   opacity: 0.7;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
 /* Movies Container */
 .movies-container {
   position: relative;
@@ -287,6 +299,7 @@
   transform: translateY(-50%) scale(1.1);
 }
 
+<<<<<<< HEAD
 /* Offers & Promotions Section */
 .offers-section {
   padding: 50px 67px;
@@ -467,6 +480,8 @@
   transform: scale(1.05);
 }
 
+=======
+>>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
 /* Sign In Modal Overlay */
 .signin-overlay {
   position: fixed;
@@ -486,6 +501,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
+<<<<<<< HEAD
   }
   to {
     opacity: 1;
@@ -606,20 +622,111 @@
   
   .movie-title {
     font-size: 40px;
+=======
+  }
+  to {
+    opacity: 1;
+>>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
   }
 }
 
-@media (max-width: 768px) {
-  .movie-card-figma {
-    min-width: 90vw;
-    height: 350px;
+/* Sign In Modal */
+.signin-modal {
+  background: rgba(10, 10, 30, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 60px 80px;
+  width: 90%;
+  max-width: 500px;
+  backdrop-filter: blur(20px);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
   }
-  
-  .movies-scroll {
-    gap: 30px;
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.signin-modal h2 {
+  font-family: 'Abhaya Libre', serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 40px 0;
+  letter-spacing: 0.1em;
+}
+
+.input-group {
+  margin-bottom: 30px;
+}
+
+.input-group label {
+  display: block;
+  font-family: 'Abhaya Libre', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  transition: all 0.3s;
+}
+
+.input-group input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.signin-btn {
+  width: 100%;
+  padding: 15px;
+  background: rgba(200, 200, 220, 0.6);
+  border: none;
+  border-radius: 10px;
+  color: #000000;
+  font-family: 'Abhaya Libre', serif;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 20px;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+}
+
+.signin-btn:hover {
+  background: rgba(220, 220, 240, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1440px) {
+  .navbar {
     padding: 0 20px;
   }
   
+<<<<<<< HEAD
   .movie-title {
     font-size: 32px;
   }
@@ -631,5 +738,38 @@
   
   .footer-content {
     grid-template-columns: 1fr;
+=======
+  .offers-promotions {
+    left: 20px;
+  }
+  
+  .text-wrapper-2 {
+    left: 250px;
+>>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
+  }
+  
+  .text-wrapper-3 {
+    right: 220px;
+    left: auto;
+  }
+  
+  .text-wrapper-4 {
+    right: 80px;
+    left: auto;
+  }
+  
+  .black-male-user {
+    right: 50px;
+    left: auto;
+  }
+  
+  .vector {
+    right: 30px;
+    left: auto;
+  }
+  
+  .group-2 {
+    right: 10px;
+    left: auto;
   }
 }
