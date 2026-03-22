@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Inria+Sans:wght@400;700&display=swap');
-=======
-@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Inria+Sans&display=swap');
->>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
 
 /* Frame Container */
 .frame {
@@ -124,13 +120,8 @@
 
 .vector {
   position: absolute;
-<<<<<<< HEAD
   right: 80px;
   top: 28px;
-=======
-  right: 75px;
-  top: 29px;
->>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
   cursor: pointer;
   transition: opacity 0.3s;
 }
@@ -152,10 +143,6 @@
 .group-2:hover {
   opacity: 0.7;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
 /* Movies Container */
 .movies-container {
   position: relative;
@@ -299,7 +286,6 @@
   transform: translateY(-50%) scale(1.1);
 }
 
-<<<<<<< HEAD
 /* Offers & Promotions Section */
 .offers-section {
   padding: 50px 67px;
@@ -480,8 +466,6 @@
   transform: scale(1.05);
 }
 
-=======
->>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
 /* Sign In Modal Overlay */
 .signin-overlay {
   position: fixed;
@@ -501,7 +485,6 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-<<<<<<< HEAD
   }
   to {
     opacity: 1;
@@ -622,11 +605,6 @@
   
   .movie-title {
     font-size: 40px;
-=======
-  }
-  to {
-    opacity: 1;
->>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
   }
 }
 
@@ -726,7 +704,6 @@
     padding: 0 20px;
   }
   
-<<<<<<< HEAD
   .movie-title {
     font-size: 32px;
   }
@@ -738,14 +715,6 @@
   
   .footer-content {
     grid-template-columns: 1fr;
-=======
-  .offers-promotions {
-    left: 20px;
-  }
-  
-  .text-wrapper-2 {
-    left: 250px;
->>>>>>> e739a77cac9138d220db5b1e81572eb596e13fd9
   }
   
   .text-wrapper-3 {
