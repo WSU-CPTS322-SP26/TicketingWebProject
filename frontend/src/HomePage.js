@@ -172,10 +172,10 @@ const HomePage = () => {
           <div className="footer-column">
             <h3>DOWNLOAD OUR APP NOW!</h3>
             <div className="app-buttons">
-              <a href="#" className="app-btn google-play">
+              <a href="https://play.google.com/store" className="app-btn google-play" target="_blank" rel="noopener noreferrer">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" />
               </a>
-              <a href="#" className="app-btn app-store">
+              <a href="https://www.apple.com/app-store/" className="app-btn app-store" target="_blank" rel="noopener noreferrer">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" />
               </a>
             </div>
@@ -226,4 +226,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
 
