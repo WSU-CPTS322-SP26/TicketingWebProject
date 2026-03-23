@@ -5,7 +5,7 @@ const movies = [
   {
     id: 1,
     title: 'CRIME 101',
-    description: 'A master thief and an insurance broker join forces for a big heist, while a determined detective pursues them to prevent the multi-million-dollar crime.',
+    description: 'A master thief and an insurance broker join forces for a big heist, while a determined detective pursues them to prevent the multi-million dollar crime.',
     image: '/crime101.jpg'
   },
   {
@@ -226,4 +226,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
 
