@@ -4,20 +4,25 @@
  * CptS 322 - Software Engineering Principles
  *
  * Author: Paramveer Singh
+ * Updated by: Surakanti Srishanth Reddy
  * Project: Tickr
  *
  * Description:
- * Basic Spring Security configuration for the backend API.
+ * Spring Security configuration for the backend API.
  * This class enables authentication using the USERS table stored
  * in Supabase. It protects API endpoints and verifies user login
  * credentials using HTTP Basic authentication.
+ *
+ * Update: Replaced NoOpPasswordEncoder with BCryptPasswordEncoder
+ * to ensure passwords are stored and compared securely.
+ * Passwords are no longer stored as plain text.
  *
  * Request Flow:
  * 1. Client sends a request to the backend.
  * 2. Spring Security intercepts the request before it reaches controllers.
  * 3. Credentials are read from the Authorization header.
  * 4. The user is loaded from the database using UserDetailsService.
- * 5. Password is validated using PasswordEncoder.
+ * 5. Password is validated using BCryptPasswordEncoder.
  * 6. If valid, access is granted based on endpoint rules.
  */
 
@@ -27,7 +32,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -99,14 +104,16 @@ public class SecurityConfig {
 
     /*
      * Defines the password encoder used during authentication.
-     * NoOpPasswordEncoder performs a direct comparison of the
-     * provided password with the stored database value.
+     * BCryptPasswordEncoder hashes passwords using the BCrypt algorithm.
      *
-     * This is used here because passwords are currently stored
-     * as plain text for development simplicity.
+     * BCrypt is a one-way hashing function — passwords cannot be reversed.
+     * When a user logs in, the provided password is hashed and compared
+     * against the stored hash in the database.
+     *
+     * All new user passwords must be stored as BCrypt hashes in Supabase.
      */
     @Bean
     PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }
