@@ -159,11 +159,12 @@ This allows the backend to start and be tested without requiring a live database
 ## Additional Documentation
 
 * [Sprint 1 Report](Sprint_reports/Sprint1_report.md)
+* [Sprint 2 Report](Sprint_reports/Sprint2_report.md)
 
 
 ## Youtube Link
 - Sprint 1: https://youtu.be/IIk4GXUgsiA
-- Sprint 2: 
+- Sprint 2: https://youtu.be/Jx_9C3aeXBg
 
 ## License
 
