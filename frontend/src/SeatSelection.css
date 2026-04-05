@@ -1,0 +1,435 @@
+/* =====================
+   SEAT SELECTION PAGE
+   ===================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap');
+
+.seat-page {
+  min-height: 100vh;
+  background: #0a0a0f;
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- NAVBAR ---- */
+.seat-nav {
+  background: #0d0d14;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.seat-nav-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.seat-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  color: #fff;
+  transition: opacity 0.2s;
+}
+.seat-logo:hover { opacity: 0.7; }
+
+.seat-nav-links {
+  display: flex;
+  gap: 36px;
+}
+.seat-nav-links span {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.2s;
+}
+.seat-nav-links span:hover { color: #fff; }
+
+.seat-nav-signin {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.seat-nav-signin:hover {
+  background: #fff;
+  color: #0a0a0f;
+}
+
+/* ---- BACK BUTTON ---- */
+.seat-back-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 20px 32px 0;
+  transition: color 0.2s;
+  align-self: flex-start;
+}
+.seat-back-btn:hover { color: #fff; }
+
+/* ---- MAIN LAYOUT ---- */
+.seat-main {
+  flex: 1;
+  display: flex;
+  gap: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 24px 32px 48px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---- GRID SECTION ---- */
+.seat-grid-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ---- SCREEN ---- */
+.screen-wrapper {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.screen-curve {
+  width: 85%;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), rgba(255,255,255,0.5), rgba(255,255,255,0.15), transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255,255,255,0.15), 0 0 60px rgba(255,255,255,0.05);
+  filter: blur(0.5px);
+}
+
+.screen-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: rgba(255,255,255,0.3);
+  margin: 0;
+}
+
+/* ---- SEAT GRID ---- */
+.seat-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.row-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.25);
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.seat-cols {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+}
+
+/* ---- SEATS ---- */
+.seat {
+  width: 34px;
+  height: 30px;
+  border-radius: 6px 6px 3px 3px;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  transition: all 0.15s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.seat::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 4px;
+  right: 4px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: inherit;
+  filter: brightness(0.6);
+}
+
+.seat.available {
+  background: #1e2235;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: transparent;
+}
+.seat.available:hover {
+  background: #2d3450;
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+
+.seat.unavailable {
+  background: #2a1a1a;
+  border: 1px solid rgba(255,60,60,0.2);
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: transparent;
+}
+
+.seat.selected {
+  background: #e63946;
+  border: 1px solid #ff5a65;
+  color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230,57,70,0.4);
+}
+
+.seat.wheelchair {
+  background: #1a2e3b;
+  border: 1px solid rgba(100,180,255,0.3);
+  color: rgba(100,180,255,0.8);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.seat.wheelchair:hover {
+  background: #1e3a4a;
+  transform: translateY(-2px);
+}
+
+/* ---- LEGEND ---- */
+.seat-legend {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.5);
+}
+
+.legend-box {
+  width: 20px;
+  height: 17px;
+  border-radius: 4px 4px 2px 2px;
+}
+.legend-box.available  { background: #1e2235; border: 1px solid rgba(255,255,255,0.1); }
+.legend-box.unavailable { background: #2a1a1a; border: 1px solid rgba(255,60,60,0.2); opacity: 0.5; }
+.legend-box.selected   { background: #e63946; }
+.legend-box.wheelchair { background: #1a2e3b; border: 1px solid rgba(100,180,255,0.3); }
+
+/* ---- BOOKING PANEL ---- */
+.booking-panel {
+  width: 300px;
+  flex-shrink: 0;
+  background: #0d0d14;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-self: flex-start;
+  position: sticky;
+  top: 88px;
+}
+
+.booking-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 3px;
+  margin: 0;
+  color: #fff;
+}
+
+.booking-poster {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.booking-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.poster-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.poster-placeholder span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.4);
+}
+
+.booking-movie-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.booking-meta {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.5px;
+  margin: -8px 0 0;
+}
+
+.booking-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+}
+
+.booking-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.booking-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.booking-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  text-align: right;
+}
+
+.seats-value {
+  font-size: 12px;
+  color: #e63946;
+  word-break: break-all;
+}
+
+.booking-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.booking-total-price {
+  font-size: 24px;
+  color: #e63946;
+}
+
+.booking-confirm-btn {
+  width: 100%;
+  padding: 14px;
+  background: #e63946;
+  border: none;
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.booking-confirm-btn:hover:not(:disabled) {
+  background: #ff4d5a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(230,57,70,0.35);
+}
+.booking-confirm-btn:disabled {
+  background: #1e2235;
+  color: rgba(255,255,255,0.25);
+  cursor: not-allowed;
+}
+
+/* ---- FOOTER ---- */
+.seat-footer {
+  background: #0d0d14;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.seat-footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 4px;
+}
+
+.seat-footer p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .seat-main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .booking-panel {
+    width: 100%;
+    max-width: 600px;
+    position: static;
+  }
+  .seat { width: 28px; height: 24px; }
+}
