@@ -26,15 +26,15 @@ import java.util.List;
 public class DbUsersDetails implements UserDetails {
 
     private final UsersEntity user;
+
     public DbUsersDetails(UsersEntity user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Spring expects roles like ROLE_ADMIN, ROLE_USER
-        String role = user.getRole(); // "ADMIN" or "USER"
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
+        // Role enum .name() gives "ADMIN", "MANAGER", "USER" — prefix for Spring Security
+        return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
 
     @Override
@@ -47,8 +47,8 @@ public class DbUsersDetails implements UserDetails {
         return user.getEmailId();
     }
 
-    @Override public boolean isAccountNonExpired() { return true; }
-    @Override public boolean isAccountNonLocked() { return true; }
+    @Override public boolean isAccountNonExpired()     { return true; }
+    @Override public boolean isAccountNonLocked()      { return true; }
     @Override public boolean isCredentialsNonExpired() { return true; }
-    @Override public boolean isEnabled() { return true; }
+    @Override public boolean isEnabled()               { return true; }
 }
