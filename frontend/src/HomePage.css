@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Inria+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700;800&display=swap');
 
-/* Frame Container */
 .frame {
   background-color: #00020f;
   display: flex;
@@ -196,7 +195,7 @@
 
 .movie-title {
   color: #ffffff;
-  font-family: "Abhaya Libre", Helvetica, serif;
+  font-family: 'Abhaya Libre', Georgia, serif;
   font-size: 48px;
   font-weight: 800;
   margin: 0 0 12px 0;
@@ -741,4 +740,13 @@
     right: 10px;
     left: auto;
   }
+}
+
+.book-now-group {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.book-now-group:hover {
+  transform: scale(1.05);
 }

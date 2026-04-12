@@ -6,14 +6,15 @@ const TickrAnimation = ({ onComplete }) => {
 
   useEffect(() => {
     const frame2Timer = setTimeout(() => setFrame(2), 800);
-    const frame3Timer = setTimeout(() => {
-      setFrame(3);
+    const frame3Timer = setTimeout(() => setFrame(3), 2600);
+    const completeTimer = setTimeout(() => {
       if (onComplete) onComplete();
-    }, 2600);
+    }, 4500); // ← Changed from 2600 to 4500 (holds final frame for ~2 seconds)
 
     return () => {
       clearTimeout(frame2Timer);
       clearTimeout(frame3Timer);
+      clearTimeout(completeTimer);
     };
   }, [onComplete]);
 
