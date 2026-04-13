@@ -6,12 +6,14 @@ import edu.wsu.cpts322.project.backend.config.security.JwtTokenProvider;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -90,6 +92,39 @@ public class AuthController {
                 .body(Map.of("message", "Registration successful. Please log in."));
     }
 
+    @PatchMapping("/users/{userId}/role")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    public ResponseEntity<?> updateUserRole(@PathVariable Long userId,
+                                            @Valid @RequestBody RoleUpdateDto dto) {
+        UsersEntity user = usersRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+
+        // Prevent self-role change (optional safety)
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (user.getEmailId().equals(currentUserEmail)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Map.of("error", "You cannot change your own role"));
+        }
+
+        // Prevent MANAGER from assigning ADMIN role
+        boolean isManager = SecurityContextHolder.getContext().getAuthentication()
+                .getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_MANAGER"));
+        if (isManager && "ADMIN".equalsIgnoreCase(dto.getRole())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Map.of("error", "Managers cannot grant ADMIN role"));
+        }
+
+        user.setRole(dto.getRole().toUpperCase());
+        usersRepository.save(user);
+
+        return ResponseEntity.ok(Map.of(
+                "message", "User role updated successfully",
+                "userId", userId,
+                "newRole", user.getRole()
+        ));
+    }
+
     @GetMapping("/public/ping")
     public ResponseEntity<?> publicPing() {
         return ResponseEntity.ok("Public endpoint - no authentication required");
@@ -142,5 +177,14 @@ public class AuthController {
         public String name;
 
         public String phone;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class RoleUpdateDto {
+        @NotBlank(message = "Role is required")
+        @Pattern(regexp = "ADMIN|MANAGER|USER", message = "Role must be ADMIN, MANAGER, or USER")
+        private String role;
     }
 }
