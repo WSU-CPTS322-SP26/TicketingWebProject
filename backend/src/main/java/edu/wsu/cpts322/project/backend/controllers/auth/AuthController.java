@@ -22,18 +22,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class AuthController {
 
-    @GetMapping("/public/ping")
-    public String publicPing() {
-        return "public ok";
-    }
+    @PostMapping("/login")
+    public Map<String, Object> login(@RequestParam String userId) {
 
-    @GetMapping("/user/ping")
-    public String userPing() {
-        return "user ok";
-    }
+        Map<String, Object> res = new HashMap<>();
 
-    @GetMapping("/admin/ping")
-    public String adminPing() {
-        return "admin ok";
+        res.put("userId", userId);
+
+        if ("admin".equals(userId)) {
+            res.put("role", "admin");
+        } else {
+            res.put("role", "moviegoer");
+        }
+
+        return res;
     }
+    
+    // @GetMapping("/public/ping")
+    // public String publicPing() {
+    //     return "public ok";
+    // }
+
+    // @GetMapping("/user/ping")
+    // public String userPing() {
+    //     return "user ok";
+    // }
+
+    // @GetMapping("/admin/ping")
+    // public String adminPing() {
+    //     return "admin ok";
+    // }
 }
