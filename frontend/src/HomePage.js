@@ -46,7 +46,7 @@ const movies = [
 const HomePage = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const { user, logout, isAuthenticated } = useAuth();
+  const { logout, isAuthenticated } = useAuth();
 
   const scroll = (direction) => {
     const container = document.querySelector('.movies-scroll');
