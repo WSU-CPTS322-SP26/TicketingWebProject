@@ -36,4 +36,21 @@ public class AuthController {
     public String adminPing() {
         return "admin ok";
     }
+
+    @PostMapping("/login")
+    public Map<String, Object> login(@RequestParam String userId) {
+
+        Map<String, Object> res = new HashMap<>();
+
+        res.put("userId", userId);
+
+        if ("admin".equals(userId)) {
+            res.put("role", "admin");
+        } else {
+            res.put("role", "moviegoer");
+        }
+
+        return res;
+    }
+
 }
