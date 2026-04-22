@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import TickrAnimation from './TickrAnimation';
 import HomePage from './HomePage';
+import { AuthProvider } from './context/AuthContext';
+import './App.css';
 
 function App() {
   const [showHomePage, setShowHomePage] = useState(false);
 
   const handleAnimationComplete = () => {
-    setTimeout(() => {
-      setShowHomePage(true);
-    }, 1000);
+    setTimeout(() => setShowHomePage(true), 1000);
   };
 
   return (
-    <div className="App">
-      {!showHomePage ? (
-        <TickrAnimation onComplete={handleAnimationComplete} />
-      ) : (
-        <HomePage />
-      )}
-    </div>
+    <AuthProvider>
+      <div className="App">
+        {!showHomePage ? (
+          <TickrAnimation onComplete={handleAnimationComplete} />
+        ) : (
+          <HomePage />
+        )}
+      </div>
+    </AuthProvider>
   );
 }
 

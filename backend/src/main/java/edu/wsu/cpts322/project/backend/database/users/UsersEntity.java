@@ -1,16 +1,3 @@
-/*
- * Copyright (c) 2026
- * Washington State University
- * CptS 322 - Software Engineering Principles
- *
- * Author: Paramveer Singh
- * Project: Tickr
- *
- * Description:
- * Entity class representing the USERS table in the SUPABASE database.
- * Stores authentication and profile information for system users.
- */
-
 package edu.wsu.cpts322.project.backend.database.users;
 
 import jakarta.persistence.*;
@@ -28,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class UsersEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long userId;
 
@@ -37,7 +25,6 @@ public class UsersEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    // Expected values: "manager" or "user"
     @Column(name = "role", nullable = false)
     private String role;
 

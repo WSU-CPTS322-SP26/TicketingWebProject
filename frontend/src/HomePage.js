@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useAuth } from './context/AuthContext';
+import LoginModal from './components/Auth/LoginModal';
+import RegisterModal from './components/Auth/RegisterModal';
 import './HomePage.css';
 
 const movies = [
@@ -41,14 +44,13 @@ const movies = [
 ];
 
 const HomePage = () => {
-  const [showSignIn, setShowSignIn] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const { user, logout, isAuthenticated } = useAuth();
 
   const scroll = (direction) => {
     const container = document.querySelector('.movies-scroll');
     const scrollAmount = 790;
-    
     if (direction === 'next') {
       container.scrollLeft += scrollAmount;
     } else {
@@ -56,10 +58,22 @@ const HomePage = () => {
     }
   };
 
-  const handleSignIn = (e) => {
-    e.preventDefault();
-    console.log('Signing in with:', email, password);
-    setShowSignIn(false);
+  const handleUserIconClick = () => {
+    if (isAuthenticated) {
+      logout();
+    } else {
+      setShowLogin(true);
+    }
+  };
+
+  const switchToRegister = () => {
+    setShowLogin(false);
+    setShowRegister(true);
+  };
+
+  const switchToLogin = () => {
+    setShowRegister(false);
+    setShowLogin(true);
   };
 
   return (
@@ -73,11 +87,12 @@ const HomePage = () => {
         <div className="text-wrapper-4">Locations</div>
         
         {/* User Icon */}
-        <div className="black-male-user" onClick={() => setShowSignIn(true)}>
+        <div className="black-male-user" onClick={handleUserIconClick}>
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="8" r="4" stroke="white" strokeWidth="2"/>
             <path d="M4 20C4 16.6863 6.68629 14 10 14H14C17.3137 14 20 16.6863 20 20" stroke="white" strokeWidth="2" strokeLinecap="round"/>
           </svg>
+          {isAuthenticated && <span className="user-indicator">●</span>}
         </div>
 
         {/* Search Icon */}
@@ -101,7 +116,6 @@ const HomePage = () => {
       {/* Movies Container */}
       <div className="movies-container">
         <button className="scroll-btn prev" onClick={() => scroll('prev')}>‹</button>
-        
         <div className="movies-scroll">
           {movies.map((movie) => (
             <div key={movie.id} className="movie-card-figma">
@@ -117,14 +131,12 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-
         <button className="scroll-btn next" onClick={() => scroll('next')}>›</button>
       </div>
 
       {/* Offers & Promotions Section */}
       <div className="offers-section">
         <h2 className="section-title">OFFERS & PROMOTIONS</h2>
-        
         <div className="offers-grid">
           <div className="offer-card">
             <div className="offer-image">
@@ -133,7 +145,6 @@ const HomePage = () => {
             <h3>STUDENT SATURDAYS</h3>
             <p>Get exclusive student discounts every Saturday on movie tickets and snacks.</p>
           </div>
-
           <div className="offer-card">
             <div className="offer-image">
               <img src="/group-bookings.jpg" alt="Group Bookings" />
@@ -141,7 +152,6 @@ const HomePage = () => {
             <h3>GROUP BOOKINGS</h3>
             <p>Book tickets with friends and unlock exclusive group discounts on your total.</p>
           </div>
-
           <div className="offer-card">
             <div className="offer-image">
               <img src="/snack-combo.jpg" alt="Snack & Save Combo" />
@@ -155,7 +165,6 @@ const HomePage = () => {
       {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
-          {/* Left Column */}
           <div className="footer-column">
             <div className="footer-logo">
               <h2>TICKR</h2>
@@ -167,8 +176,6 @@ const HomePage = () => {
               <a href="#terms">TERMS & CONDITIONS</a>
             </div>
           </div>
-
-          {/* Middle Column */}
           <div className="footer-column">
             <h3>DOWNLOAD OUR APP NOW!</h3>
             <div className="app-buttons">
@@ -180,8 +187,6 @@ const HomePage = () => {
               </a>
             </div>
           </div>
-
-          {/* Right Column */}
           <div className="footer-column">
             <div className="footer-links">
               <a href="#about">ABOUT US</a>
@@ -192,39 +197,21 @@ const HomePage = () => {
         </div>
       </footer>
 
-      {/* Sign In Modal */}
-      {showSignIn && (
-        <div className="signin-overlay" onClick={() => setShowSignIn(false)}>
-          <div className="signin-modal" onClick={(e) => e.stopPropagation()}>
-            <h2>SIGN IN</h2>
-            <form onSubmit={handleSignIn}>
-              <div className="input-group">
-                <label>EMAIL</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="input-group">
-                <label>PASSWORD</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <button type="submit" className="signin-btn">SIGN IN</button>
-            </form>
-          </div>
-        </div>
+      {/* Modals */}
+      {showLogin && (
+        <LoginModal
+          onClose={() => setShowLogin(false)}
+          onSwitchToRegister={switchToRegister}
+        />
+      )}
+      {showRegister && (
+        <RegisterModal
+          onClose={() => setShowRegister(false)}
+          onSwitchToLogin={switchToLogin}
+        />
       )}
     </div>
   );
 };
 
 export default HomePage;
-
-
