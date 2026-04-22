@@ -14,6 +14,11 @@
 
 package edu.wsu.cpts322.project.backend.controllers.auth;
 
+import java.util.Map;
+import java.util.HashMap;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,4 +41,21 @@ public class AuthController {
     public String adminPing() {
         return "admin ok";
     }
+
+    @PostMapping("/login")
+    public Map<String, Object> login(@RequestParam String userId) {
+
+        Map<String, Object> res = new HashMap<>();
+
+        res.put("userId", userId);
+
+        if ("admin".equals(userId)) {
+            res.put("role", "admin");
+        } else {
+            res.put("role", "moviegoer");
+        }
+
+        return res;
+    }
+
 }
