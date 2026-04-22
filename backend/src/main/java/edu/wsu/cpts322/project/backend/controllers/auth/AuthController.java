@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/auth")
 public class AuthController {
 
     @GetMapping("/public/ping")
@@ -43,19 +43,33 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestParam String userId) {
+    public Map<String, Object> login(@RequestBody Map<String, String> body) {
+
+        String email = body.get("email");
+        String password = body.get("password");
 
         Map<String, Object> res = new HashMap<>();
 
-        res.put("userId", userId);
-
-        if ("admin".equals(userId)) {
+        if ("admin@wsu.edu".equals(email) && "123".equals(password)) {
+            res.put("userId", "admin");
             res.put("role", "admin");
-        } else {
+        } else if ("user@wsu.edu".equals(email)) {
+            res.put("userId", "user");
             res.put("role", "moviegoer");
+        } else {
+            throw new RuntimeException("Invalid credentials");
         }
 
         return res;
     }
 
+    @PostMapping("/register")
+    public Map<String, Object> register(@RequestBody Map<String, String> body) {
+
+        Map<String, Object> res = new HashMap<>();
+        res.put("message", "user registered");
+        return res;
+    }
+    
+    @CrossOrigin(origins = "http://localhost:3000")//backend -> frontend, change 3000 if needed
 }
