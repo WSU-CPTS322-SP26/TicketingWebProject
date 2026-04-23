@@ -1,0 +1,497 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap');
+
+/* =====================
+   LOCATIONS PAGE
+   ===================== */
+
+.locations-page {
+  min-height: 100vh;
+  background: #0d0d0d;
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- NAVBAR ---- */
+.locations-nav {
+  background: #111;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.locations-nav-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.locations-nav-left,
+.locations-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex: 1;
+}
+
+.locations-nav-right { justify-content: flex-end; }
+
+.locations-nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.locations-nav-link:hover,
+.locations-nav-link.active { color: #fff; }
+
+.locations-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  color: #fff;
+  transition: opacity 0.2s;
+  flex: 0;
+  white-space: nowrap;
+}
+.locations-logo:hover { opacity: 0.7; }
+
+.locations-nav-icon {
+  font-size: 16px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.55);
+  transition: color 0.2s;
+}
+.locations-nav-icon:hover { color: #fff; }
+
+/* ---- PAGE HEADER ---- */
+.locations-header {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 56px 40px 40px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.locations-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  letter-spacing: 6px;
+  line-height: 1;
+  margin: 0 0 10px;
+}
+
+.locations-sub {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ---- LOCATION ROWS ---- */
+.locations-list {
+  flex: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 48px 40px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.location-row {
+  display: flex;
+  height: 300px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.location-row:hover {
+  border-color: #e63946;
+  transform: translateY(-2px);
+}
+
+.location-row--reverse { flex-direction: row-reverse; }
+
+/* Image Side */
+.location-row-image {
+  width: 400px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.location-row-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease;
+}
+
+.location-row:hover .location-row-image img { transform: scale(1.05); }
+
+.location-row-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 50%, rgba(13,13,13,0.7));
+  z-index: 1;
+}
+
+.location-row--reverse .location-row-image-overlay {
+  background: linear-gradient(to left, transparent 50%, rgba(13,13,13,0.7));
+}
+
+.location-screens-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(255,255,255,0.2);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.8);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* Content Side */
+.location-row-content {
+  flex: 1;
+  padding: 28px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  background: #141414;
+}
+
+.location-neighborhood {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.location-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 3px;
+  margin: 0;
+  line-height: 1;
+}
+
+.location-features {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.location-feature-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #e63946;
+  border: 1px solid rgba(230,57,70,0.35);
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+.location-contact { display: flex; flex-direction: column; gap: 4px; }
+
+.location-contact-row {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.location-contact-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.location-contact-value { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+.location-hours { display: flex; flex-direction: column; gap: 3px; }
+
+.location-hours-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.location-hours-row { display: flex; gap: 16px; }
+
+.location-hours-days {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.location-hours-time { font-size: 12px; color: rgba(255,255,255,0.65); }
+
+.location-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+  background: transparent;
+  border: 1px solid rgba(230,57,70,0.6);
+  color: #e63946;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding: 10px 24px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.location-btn:hover {
+  background: #e63946;
+  color: #fff;
+  border-color: #e63946;
+}
+
+/* =====================
+   MODAL
+   ===================== */
+
+.loc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+
+.loc-modal {
+  background: #141414;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 85vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  animation: modalIn 0.25s ease;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal scrollbar */
+.loc-modal::-webkit-scrollbar { width: 4px; }
+.loc-modal::-webkit-scrollbar-track { background: transparent; }
+.loc-modal::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* Modal Header */
+.loc-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 32px 20px;
+  position: sticky;
+  top: 0;
+  background: #141414;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.loc-modal-neighborhood {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.loc-modal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 3px;
+  margin: 0 0 4px;
+  line-height: 1;
+}
+
+.loc-modal-address {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.loc-modal-close {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.loc-modal-close:hover {
+  border-color: #e63946;
+  color: #e63946;
+}
+
+.loc-modal-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
+/* Modal Body */
+.loc-modal-body {
+  padding: 8px 0 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Movie Row */
+.loc-movie-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.2s;
+}
+
+.loc-movie-row:last-child { border-bottom: none; }
+.loc-movie-row:hover { background: rgba(255,255,255,0.02); }
+
+/* Poster */
+.loc-movie-poster {
+  width: 80px;
+  height: 52px;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.loc-movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Movie info */
+.loc-movie-info {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.loc-movie-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin: 0 0 3px;
+  line-height: 1;
+}
+
+.loc-movie-meta {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* Showtimes */
+.loc-showtimes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+}
+
+.loc-showtime-btn {
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.75);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.18s;
+}
+
+.loc-showtime-btn:hover {
+  background: #e63946;
+  border-color: #e63946;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .location-row,
+  .location-row--reverse {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .location-row-image {
+    width: 100%;
+    height: 200px;
+    position: relative;
+  }
+
+  .location-row-content { padding: 24px 20px; }
+  .location-name        { font-size: 28px; }
+  .locations-heading    { font-size: 48px; }
+  .locations-list       { padding: 32px 20px 48px; }
+
+  .loc-modal { max-height: 90vh; }
+  .loc-movie-row { flex-wrap: wrap; gap: 12px; padding: 14px 20px; }
+  .loc-movie-info { width: 100%; }
+  .loc-modal-header { padding: 20px; }
+}

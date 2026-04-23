@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap');
+
+/* =====================
+   OFFERS PAGE
+   ===================== */
+
+.offers-page {
+  min-height: 100vh;
+  background: #0d0d0d;
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- NAVBAR ---- */
+.offers-nav {
+  background: #111;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.offers-nav-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.offers-nav-left,
+.offers-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex: 1;
+}
+
+.offers-nav-right {
+  justify-content: flex-end;
+}
+
+.offers-nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.offers-nav-link:hover,
+.offers-nav-link.active {
+  color: #fff;
+}
+
+.offers-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  color: #fff;
+  transition: opacity 0.2s;
+  flex: 0;
+  white-space: nowrap;
+}
+.offers-logo:hover { opacity: 0.7; }
+
+.offers-nav-icon {
+  font-size: 16px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.55);
+  transition: color 0.2s;
+}
+.offers-nav-icon:hover { color: #fff; }
+
+/* ---- PAGE HEADER ---- */
+.offers-page-header {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 56px 40px 40px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.offers-page-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  letter-spacing: 6px;
+  line-height: 1;
+  margin: 0 0 10px;
+}
+
+.offers-page-sub {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ---- OFFER ROWS ---- */
+.offers-list {
+  flex: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 48px 40px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.offer-row {
+  display: flex;
+  height: 280px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.offer-row:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.offer-row--reverse {
+  flex-direction: row-reverse;
+}
+
+/* Image Side */
+.offer-row-image {
+  width: 380px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.offer-row-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease;
+}
+
+.offer-row:hover .offer-row-image img {
+  transform: scale(1.06);
+}
+
+.offer-row-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    transparent 60%,
+    rgba(13,13,13,0.6)
+  );
+}
+
+.offer-row--reverse .offer-row-image-overlay {
+  background: linear-gradient(
+    to left,
+    transparent 60%,
+    rgba(13,13,13,0.6)
+  );
+}
+
+/* Content Side */
+.offer-row-content {
+  flex: 1;
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  background: #141414;
+}
+
+.offer-row-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 10px;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+
+.offer-row-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  letter-spacing: 3px;
+  margin: 0;
+  line-height: 1;
+}
+
+.offer-row-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.offer-row-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+  max-width: 480px;
+}
+
+/* Detail bullets */
+.offer-row-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+}
+
+.offer-row-details li {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.35);
+  padding-left: 14px;
+  position: relative;
+}
+
+.offer-row-details li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 10px;
+}
+
+/* CTA Button */
+.offer-row-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding: 10px 24px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.offer-row-btn:hover {
+  background: var(--accent);
+  color: #0d0d0d;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .offer-row,
+  .offer-row--reverse {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .offer-row-image {
+    width: 100%;
+    height: 200px;
+  }
+
+  .offer-row-content {
+    padding: 24px 20px;
+  }
+
+  .offer-row-title {
+    font-size: 32px;
+  }
+
+  .offers-page-heading {
+    font-size: 48px;
+  }
+
+  .offers-list {
+    padding: 32px 20px 48px;
+  }
+}
