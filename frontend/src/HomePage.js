@@ -190,6 +190,7 @@ const HomePage = () => {
             {/* User Icon — shows initials avatar if logged in */}
             <div
               className="black-male-user"
+              onClick={() => navigate('/my-bookings')}
               title={user.name ? `Logged in as ${user.name}` : 'My Account'}
               style={{ cursor: 'pointer' }}
             >
