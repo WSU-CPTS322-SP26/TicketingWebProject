@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap');
+
 :root {
-  --bg: #020523;
+  --bg: #0a0a0f;
   --text: #ffffff;
   --dur: 700ms;
   --curve: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --stack-size: clamp(3rem, 4vw, 4.5rem);
-  --final-size: clamp(4rem, 5vw, 6rem);
-  --gap: clamp(3.5rem, 4.5vh, 5rem);
-  --tagline-offset: clamp(1.2rem, 2.5vw, 2.5rem);
+  --stack-size: clamp(2.5rem, 3.5vw, 4rem);
+  --final-size: clamp(2.8rem, 4.5vw, 5rem);
+  --gap: clamp(4.5rem, 6vh, 6.5rem);
+  --tagline-offset: clamp(1.8rem, 2.8vw, 3rem);
 }
 
 * {
@@ -18,9 +20,9 @@
   min-height: 100svh;
   position: relative;
   overflow: hidden;
-  background: var(--bg);
+  background: linear-gradient(135deg, #0a000f 0%, #0f0005 30%, #150010 60%, #00020f 100%);
   color: var(--text);
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .stack {
@@ -36,8 +38,10 @@
   left: 50%;
   top: 50%;
   margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: var(--stack-size);
-  font-weight: 700;
+  font-weight: 400;
+  letter-spacing: 0.3em;
   line-height: 1;
   transform: translate(-50%, -50%) translateY(0);
   opacity: 0;
@@ -50,14 +54,14 @@
   z-index: 2;
 }
 
-/* Frame 2: first word slides up, 7 others come in */
+/* Frame 2: stack spreads out */
 .frame-2 .word,
 .frame-3 .word {
   transform: translate(-50%, -50%) translateY(calc((var(--i) - 3.5) * var(--gap)));
   opacity: 1;
 }
 
-/* Frame 3: only top word remains, becomes big and centered */
+/* Frame 3: only first word remains */
 .frame-3 .word:not(.first) {
   opacity: 0;
   transition-delay: 0ms;
@@ -66,21 +70,25 @@
 .frame-3 .first {
   transform: translate(-50%, -50%) translateY(0);
   font-size: var(--final-size);
+  letter-spacing: 0.45em;
   transition-delay: 0ms;
   opacity: 1;
 }
 
-/* Subtitle appears below centered logo */
+/* Tagline sits right underneath TICKR */
 .tagline {
   position: absolute;
   left: 50%;
   top: calc(50% + var(--tagline-offset));
   transform: translateX(-50%);
   margin: 0;
-  font-size: clamp(1.2rem, 2vw, 2.5rem);
+  font-family: 'Barlow', sans-serif;
+  font-size: clamp(0.6rem, 0.95vw, 0.85rem);
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.15em;
-  font-weight: 400;
+  letter-spacing: 1.0em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
   white-space: nowrap;
   opacity: 0;
   transition: opacity var(--dur) var(--curve);
