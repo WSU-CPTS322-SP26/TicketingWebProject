@@ -35,6 +35,7 @@ const MyBookingsPage = () => {
   const [loading, setLoading]       = useState(true);
   const [error, setError]           = useState('');
   const [cancelling, setCancelling] = useState(null);
+  const [cancelError, setCancelError] = useState('');
 
   const user  = JSON.parse(localStorage.getItem('tickr_user') || '{}');
   const token = localStorage.getItem('tickr_token');
@@ -68,21 +69,28 @@ const MyBookingsPage = () => {
   const handleCancel = async (bookingId) => {
     if (!window.confirm('Are you sure you want to cancel this booking?')) return;
     setCancelling(bookingId);
+    setCancelError('');
     try {
       const res = await fetch(`${API_BASE}/api/user/bookings/${bookingId}/cancel`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` },
       });
+
       if (res.ok) {
+        // Update local state
         setBookings(prev =>
-          prev.map(b => b.bookingId === bookingId || b.id === bookingId
+          prev.map(b => (b.bookingId === bookingId || b.id === bookingId)
             ? { ...b, status: 'cancelled' }
             : b
           )
         );
+      } else {
+        const data = await res.json();
+        setCancelError(data.error || data.message || 'Cancellation failed');
       }
     } catch (err) {
       console.error('Error cancelling booking:', err);
+      setCancelError('Network error. Please try again.');
     } finally {
       setCancelling(null);
     }
@@ -161,6 +169,24 @@ const MyBookingsPage = () => {
 
         {!loading && !error && bookings.length > 0 && (
           <div className="mb-list">
+            {/* Cancel error banner */}
+            {cancelError && (
+              <div style={{
+                background: 'rgba(230,57,70,0.08)',
+                border: '1px solid rgba(230,57,70,0.25)',
+                padding: '10px 16px',
+                borderRadius: '2px',
+                color: '#e63946',
+                fontSize: '12px',
+                marginBottom: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <span>⚠</span> {cancelError}
+              </div>
+            )}
+
             {bookings.map((booking) => {
               const id     = getBookingId(booking);
               const title  = getMovieTitle(booking);

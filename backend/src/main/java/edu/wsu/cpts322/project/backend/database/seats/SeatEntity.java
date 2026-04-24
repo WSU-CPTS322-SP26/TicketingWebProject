@@ -1,20 +1,7 @@
-/*
- * Copyright (c) 2026
- * Washington State University
- * CptS 322 - Software Engineering Principles
- *
- * Author: Surakanti Srishanth Reddy
- * Project: Tickr
- *
- * Description:
- * Entity class representing the SEATS table in the Supabase database.
- * Each seat belongs to a screen and has a type, status, and optional
- * block expiry timestamp for temporary seat holds during booking.
- */
-
 package edu.wsu.cpts322.project.backend.database.seats;
 
 import edu.wsu.cpts322.project.backend.database.screens.ScreenEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +25,7 @@ public class SeatEntity {
 
     @ManyToOne
     @JoinColumn(name = "screen_id", nullable = false)
+    @JsonIgnoreProperties({"theater", "totalSeats"})
     private ScreenEntity screen;
 
     @Column(name = "seat_number")

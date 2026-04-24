@@ -1,19 +1,7 @@
-/*
- * Copyright (c) 2026
- * Washington State University
- * CptS 322 - Software Engineering Principles
- *
- * Author: Surakanti Srishanth Reddy
- * Project: Tickr
- *
- * Description:
- * Entity class representing the SCREENS table in the Supabase database.
- * Each screen belongs to a theater and has a seating capacity.
- */
-
 package edu.wsu.cpts322.project.backend.database.screens;
 
 import edu.wsu.cpts322.project.backend.database.theaters.TheaterEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,8 +21,9 @@ public class ScreenEntity {
     @Column(name = "screen_id")
     private Integer screenId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "theater_id", nullable = false)
+    @JsonIgnoreProperties("screens")    // prevent theater -> screens loop
     private TheaterEntity theater;
 
     @Column(name = "screen_name")

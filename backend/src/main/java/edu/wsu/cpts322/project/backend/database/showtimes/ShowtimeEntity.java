@@ -1,21 +1,9 @@
-/*
- * Copyright (c) 2026
- * Washington State University
- * CptS 322 - Software Engineering Principles
- *
- * Author: Surakanti Srishanth Reddy
- * Project: Tickr
- *
- * Description:
- * Entity class representing the SHOWTIMES table in the Supabase database.
- * Links a movie to a screen at a specific date and time,
- * and tracks how many seats are still available.
- */
-
 package edu.wsu.cpts322.project.backend.database.showtimes;
 
 import edu.wsu.cpts322.project.backend.database.movies.MovieEntity;
 import edu.wsu.cpts322.project.backend.database.screens.ScreenEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,12 +26,14 @@ public class ShowtimeEntity {
     @Column(name = "showtime_id")
     private Integer showtimeId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_id", nullable = false)
+    @JsonIgnoreProperties({"durationMinutes", "rating", "posterUrl", "description"})  // keep it light
     private MovieEntity movie;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "screen_id", nullable = false)
+    @JsonIgnoreProperties({"theater"})   // don't drill into theater from screen
     private ScreenEntity screen;
 
     @Column(name = "show_date", nullable = false)
@@ -54,4 +44,11 @@ public class ShowtimeEntity {
 
     @Column(name = "available_seats")
     private Integer availableSeats;
+
+    @JsonProperty("theaterName")
+    public String getTheaterName() {
+        return screen != null && screen.getTheater() != null
+                ? screen.getTheater().getName()
+                : null;
+    }
 }

@@ -1,16 +1,3 @@
-/*
- * Copyright (c) 2026
- * Washington State University
- * CptS 322 - Software Engineering Principles
- *
- * Author: Surakanti Srishanth Reddy
- * Project: Tickr
- *
- * Description:
- * Entity class representing the MOVIES table in the Supabase database.
- * Stores all movie details including metadata and poster URL.
- */
-
 package edu.wsu.cpts322.project.backend.database.movies;
 
 import jakarta.persistence.*;

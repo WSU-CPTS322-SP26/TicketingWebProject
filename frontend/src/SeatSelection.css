@@ -108,6 +108,7 @@
   flex-direction: column;
   align-items: center;
   gap: 32px;
+  min-width: 0;
 }
 
 /* ---- SCREEN ---- */
@@ -141,7 +142,7 @@
 .seat-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
   max-width: 700px;
 }
@@ -149,7 +150,7 @@
 .seat-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .row-label {
@@ -157,75 +158,70 @@
   font-size: 13px;
   letter-spacing: 1px;
   color: rgba(255,255,255,0.25);
-  width: 16px;
+  width: 18px;
   text-align: center;
   flex-shrink: 0;
 }
 
 .seat-cols {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   flex: 1;
   justify-content: center;
 }
 
-/* ---- SEATS ---- */
+/* ---- SEATS (adjusted size for 14 columns) ---- */
 .seat {
-  width: 34px;
-  height: 30px;
-  border-radius: 6px 6px 3px 3px;
+  width: 28px;
+  height: 26px;
+  border-radius: 5px 5px 3px 3px;
   border: none;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 10px;
   transition: all 0.15s ease;
   position: relative;
   flex-shrink: 0;
+  background: #1e2235;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: transparent;
 }
-
 .seat::after {
   content: '';
   position: absolute;
   bottom: -3px;
-  left: 4px;
-  right: 4px;
+  left: 3px;
+  right: 3px;
   height: 3px;
   border-radius: 0 0 3px 3px;
   background: inherit;
   filter: brightness(0.6);
 }
-
 .seat.available {
   background: #1e2235;
   border: 1px solid rgba(255,255,255,0.1);
-  color: transparent;
 }
 .seat.available:hover {
   background: #2d3450;
   border-color: rgba(255,255,255,0.25);
   transform: translateY(-2px);
 }
-
 .seat.unavailable {
   background: #2a1a1a;
   border: 1px solid rgba(255,60,60,0.2);
   cursor: not-allowed;
   opacity: 0.5;
-  color: transparent;
 }
-
 .seat.selected {
   background: #e63946;
   border: 1px solid #ff5a65;
-  color: transparent;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(230,57,70,0.4);
 }
-
 .seat.wheelchair {
   background: #1a2e3b;
   border: 1px solid rgba(100,180,255,0.3);
   color: rgba(100,180,255,0.8);
-  font-size: 13px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,8 +236,9 @@
   display: flex;
   gap: 32px;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-
 .legend-item {
   display: flex;
   align-items: center;
@@ -250,10 +247,9 @@
   letter-spacing: 0.5px;
   color: rgba(255,255,255,0.5);
 }
-
 .legend-box {
-  width: 20px;
-  height: 17px;
+  width: 18px;
+  height: 15px;
   border-radius: 4px 4px 2px 2px;
 }
 .legend-box.available  { background: #1e2235; border: 1px solid rgba(255,255,255,0.1); }
@@ -276,7 +272,6 @@
   position: sticky;
   top: 88px;
 }
-
 .booking-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 20px;
@@ -284,7 +279,6 @@
   margin: 0;
   color: #fff;
 }
-
 .booking-poster {
   width: 100%;
   aspect-ratio: 16/9;
@@ -310,33 +304,28 @@
   letter-spacing: 4px;
   color: rgba(255,255,255,0.4);
 }
-
 .booking-movie-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 22px;
   letter-spacing: 2px;
   margin: 0;
 }
-
 .booking-meta {
   font-size: 12px;
   color: rgba(255,255,255,0.45);
   letter-spacing: 0.5px;
   margin: -8px 0 0;
 }
-
 .booking-divider {
   height: 1px;
   background: rgba(255,255,255,0.07);
 }
-
 .booking-info-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
 }
-
 .booking-label {
   font-size: 10px;
   letter-spacing: 1.5px;
@@ -344,20 +333,17 @@
   text-transform: uppercase;
   flex-shrink: 0;
 }
-
 .booking-value {
   font-size: 13px;
   font-weight: 500;
   color: #fff;
   text-align: right;
 }
-
 .seats-value {
   font-size: 12px;
   color: #e63946;
   word-break: break-all;
 }
-
 .booking-total-row {
   display: flex;
   justify-content: space-between;
@@ -366,12 +352,10 @@
   font-size: 16px;
   letter-spacing: 2px;
 }
-
 .booking-total-price {
   font-size: 24px;
   color: #e63946;
 }
-
 .booking-confirm-btn {
   width: 100%;
   padding: 14px;
@@ -406,13 +390,11 @@
   align-items: center;
   gap: 8px;
 }
-
 .seat-footer-logo {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 22px;
   letter-spacing: 4px;
 }
-
 .seat-footer p {
   font-size: 12px;
   color: rgba(255,255,255,0.25);
@@ -431,5 +413,5 @@
     max-width: 600px;
     position: static;
   }
-  .seat { width: 28px; height: 24px; }
+  .seat { width: 24px; height: 22px; }
 }

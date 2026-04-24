@@ -5,16 +5,6 @@ import Footer from './Footer';
 
 const API_BASE = 'http://localhost:8080';
 
-// Fallback movie data
-const fallbackMovieData = {
-  1: { title: 'CRIME 101',          image: '/crime101.jpg',  bgImage: '/crime101bg.jpg', language: 'ENGLISH', duration: '139MIN', genre: 'CRIME, THRILLER' },
-  2: { title: 'HAMNET',             image: '/hamnet.jpg',    bgImage: '/hamnet.jpg',     language: 'ENGLISH', duration: '120MIN', genre: 'DRAMA, BIOGRAPHY' },
-  3: { title: 'SEND HELP',          image: '/sendhelp.jpg',  bgImage: '/sendhelp.jpg',   language: 'ENGLISH', duration: '105MIN', genre: 'COMEDY, ADVENTURE' },
-  4: { title: 'WUTHERING HEIGHTS',  image: '/wuthering.jpg', bgImage: '/wuthering.jpg',  language: 'ENGLISH', duration: '142MIN', genre: 'ROMANCE, DRAMA' },
-  5: { title: 'MERCY',              image: '/mercy.jpg',     bgImage: '/mercy.jpg',      language: 'ENGLISH', duration: '98MIN',  genre: 'SCI-FI, THRILLER' },
-  6: { title: 'SCREAM 7',           image: '/scream7.jpg',   bgImage: '/scream7.jpg',    language: 'ENGLISH', duration: '115MIN', genre: 'HORROR, THRILLER' },
-};
-
 const posterMap = {
   'CRIME 101':         '/crime101.jpg',
   'HAMNET':            '/hamnet.jpg',
@@ -24,16 +14,6 @@ const posterMap = {
   'SCREAM 7':          '/scream7.jpg',
 };
 
-const theaters = [
-  { name: 'AMC Pacific Place 11',  address: '600 Pine St Ste 400, Seattle, WA 98101' },
-  { name: 'Regal Meridian',        address: '1501 7th Ave, Seattle, WA 98101' },
-  { name: 'Majestic Bay Theatres', address: '2044 NW Market St, Seattle, WA 98107' },
-  { name: 'Regal Thornton Place',  address: '301 NE 103rd St, Seattle, WA 98125' },
-  { name: 'AMC Oak Tree 6',        address: '10006 Aurora Ave N, Seattle, WA 98133' },
-  { name: 'SIFF Cinema Downtown',  address: '2100 4th Ave, Seattle, WA 98121' },
-];
-
-// Generate 6 dates starting from today
 const generateDates = () => {
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const dates = [];
@@ -54,7 +34,6 @@ const generateDates = () => {
 
 const dates = generateDates();
 
-// Format time from backend (e.g. "14:30:00" → "2:30 PM")
 const formatTime = (timeStr) => {
   if (!timeStr) return '';
   const [h, m] = timeStr.split(':');
@@ -95,7 +74,14 @@ const BookingPage = () => {
         });
       } catch (err) {
         console.error('Error fetching movie:', err);
-        setMovie(fallbackMovieData[movieId] || fallbackMovieData[1]);
+        setMovie({
+          title:    'MOVIE NOT FOUND',
+          image:    '/crime101.jpg',
+          bgImage:  '/crime101.jpg',
+          language: '',
+          duration: '',
+          genre:    '',
+        });
       } finally {
         setLoadingMovie(false);
       }
@@ -127,37 +113,36 @@ const BookingPage = () => {
     fetchShowtimes();
   }, [movieId, selectedDate]);
 
-  // Group showtimes by theater name
-  const showtimesByTheater = theaters.reduce((acc, theater) => {
-    acc[theater.name] = showtimes
-      .filter(s => s.theaterName === theater.name || s.theater?.name === theater.name)
-      .map(s => ({
-        time: formatTime(s.showTime || s.startTime || s.time),
-        showtimeId: s.showtimeId || s.id,
-        screenId: s.screenId || s.screen?.screenId,
-      }));
-    return acc;
-  }, {});
+  // Dynamically group showtimes by theater from backend data
+  const theatersWithShowtimes = [];
+  const theaterMap = new Map();
 
-  // Fallback hardcoded showtimes if none from backend
-  const fallbackShowtimes = {
-    'AMC Pacific Place 11':  { 0: ['10:00 AM','1:30 PM','4:45 PM','8:15 PM'],   1: ['9:30 AM','12:45 PM','4:00 PM','7:30 PM'],  2: ['10:30 AM','2:00 PM','5:30 PM','9:00 PM'],  3: ['11:00 AM','2:30 PM','6:00 PM','9:30 PM'],  4: ['10:00 AM','1:15 PM','4:30 PM','8:00 PM'],  5: ['9:00 AM','12:30 PM','4:00 PM','7:15 PM'] },
-    'Regal Meridian':        { 0: ['11:00 AM','2:30 PM','6:00 PM','9:30 PM'],   1: ['10:30 AM','1:45 PM','5:15 PM','8:45 PM'], 2: ['9:45 AM','1:00 PM','4:30 PM','8:00 PM'],   3: ['10:15 AM','1:30 PM','5:00 PM','8:30 PM'],  4: ['11:30 AM','3:00 PM','6:30 PM','10:00 PM'], 5: ['10:00 AM','1:00 PM','4:15 PM','7:45 PM'] },
-    'Majestic Bay Theatres': { 0: ['12:00 PM','3:30 PM','7:00 PM','10:15 PM'],  1: ['11:15 AM','2:30 PM','5:45 PM','9:00 PM'], 2: ['10:45 AM','2:15 PM','5:45 PM','9:15 PM'],  3: ['12:30 PM','4:00 PM','7:30 PM'],            4: ['11:00 AM','2:00 PM','5:30 PM','8:45 PM'],  5: ['10:30 AM','1:45 PM','5:00 PM','8:15 PM'] },
-    'Regal Thornton Place':  { 0: ['9:30 AM','1:00 PM','4:30 PM','8:00 PM'],    1: ['10:00 AM','1:15 PM','4:45 PM','8:15 PM'], 2: ['11:30 AM','3:00 PM','6:30 PM','9:45 PM'],  3: ['9:45 AM','1:15 PM','4:45 PM','8:15 PM'],   4: ['10:30 AM','2:00 PM','5:30 PM','9:00 PM'],  5: ['11:00 AM','2:30 PM','6:00 PM','9:30 PM'] },
-    'AMC Oak Tree 6':        { 0: ['10:15 AM','1:45 PM','5:15 PM','8:45 PM'],   1: ['9:00 AM','12:30 PM','4:00 PM','7:30 PM'], 2: ['10:00 AM','1:30 PM','5:00 PM','8:30 PM'],  3: ['11:15 AM','2:45 PM','6:15 PM','9:45 PM'],  4: ['9:30 AM','1:00 PM','4:30 PM','8:00 PM'],   5: ['10:45 AM','2:15 PM','5:45 PM','9:15 PM'] },
-    'SIFF Cinema Downtown':  { 0: ['11:30 AM','3:00 PM','6:30 PM','9:45 PM'],   1: ['10:00 AM','1:30 PM','5:00 PM','8:30 PM'], 2: ['9:30 AM','12:45 PM','4:15 PM','7:45 PM'],  3: ['10:30 AM','2:00 PM','5:30 PM','9:00 PM'],  4: ['11:00 AM','2:30 PM','6:00 PM','9:30 PM'],  5: ['9:15 AM','12:30 PM','4:00 PM','7:30 PM'] },
-  };
+  showtimes.forEach(s => {
+    const theaterName = s.theaterName || s.screen?.theater?.name || 'Unknown Theater';
+    const screenId = s.screen?.screenId || s.screenId || null;
 
-  const getTimesForTheater = (theaterName) => {
-    const fromBackend = showtimesByTheater[theaterName];
-    if (fromBackend && fromBackend.length > 0) {
-      return fromBackend.map(s => ({ time: s.time, showtimeId: s.showtimeId, screenId: s.screenId }));
+    if (!theaterMap.has(theaterName)) {
+      theaterMap.set(theaterName, {
+        name: theaterName,
+        address: '',
+        screenId: screenId,
+        showtimes: []
+      });
     }
-    return (fallbackShowtimes[theaterName]?.[selectedDate] || []).map(t => ({ time: t }));
-  };
 
-  const handleShowtimeClick = (timeObj, theaterName, theaterAddress) => {
+    theaterMap.get(theaterName).showtimes.push({
+      time: formatTime(s.showTime || s.startTime || s.time),
+      showtimeId: s.showtimeId || s.id,
+      screenId: screenId,
+    });
+  });
+
+  // Convert map to array for rendering
+  theaterMap.forEach((value) => {
+    theatersWithShowtimes.push(value);
+  });
+
+  const handleShowtimeClick = (timeObj, theaterName) => {
     if (!movie) return;
     navigate('/seats', {
       state: {
@@ -172,7 +157,7 @@ const BookingPage = () => {
         showtimeId:    timeObj.showtimeId,
         screenId:      timeObj.screenId,
         cinema:        theaterName,
-        cinemaAddress: theaterAddress,
+        cinemaAddress: '',
         date:          `${dates[selectedDate].day} ${dates[selectedDate].date}`,
       }
     });
@@ -233,43 +218,40 @@ const BookingPage = () => {
         </div>
       </div>
 
-      {/* Theater Listings */}
+      {/* Theater Listings — built dynamically from backend showtimes */}
       <div className="theater-listings">
-        {theaters.map((theater, index) => {
-          const times = getTimesForTheater(theater.name);
-          return (
+        {loadingShowtimes ? (
+          <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px', letterSpacing: '1px', textAlign: 'center', padding: '40px' }}>
+            Loading showtimes...
+          </div>
+        ) : theatersWithShowtimes.length === 0 ? (
+          <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px', letterSpacing: '1px', textAlign: 'center', padding: '40px' }}>
+            No showtimes available for this date
+          </div>
+        ) : (
+          theatersWithShowtimes.map((theater, index) => (
             <div key={index} className="theater-item">
               <div className="theater-row">
                 <div className="theater-info">
                   <h3 className="theater-name">{theater.name}</h3>
-                  <p className="theater-address">{theater.address}</p>
+                  {theater.address && <p className="theater-address">{theater.address}</p>}
                 </div>
                 <div className="showtimes">
-                  {loadingShowtimes ? (
-                    <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px', letterSpacing: '1px' }}>
-                      Loading showtimes...
-                    </span>
-                  ) : times.length === 0 ? (
-                    <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px', letterSpacing: '1px' }}>
-                      No showtimes available
-                    </span>
-                  ) : (
-                    times.map((timeObj, idx) => (
-                      <button
-                        key={idx}
-                        className="showtime-button"
-                        onClick={() => handleShowtimeClick(timeObj, theater.name, theater.address)}
-                      >
-                        {timeObj.time}
-                      </button>
-                    ))
-                  )}
+                  {theater.showtimes.map((timeObj, idx) => (
+                    <button
+                      key={idx}
+                      className="showtime-button"
+                      onClick={() => handleShowtimeClick(timeObj, theater.name)}
+                    >
+                      {timeObj.time}
+                    </button>
+                  ))}
                 </div>
               </div>
-              {index < theaters.length - 1 && <div className="divider"></div>}
+              {index < theatersWithShowtimes.length - 1 && <div className="divider"></div>}
             </div>
-          );
-        })}
+          ))
+        )}
       </div>
 
       <Footer />
