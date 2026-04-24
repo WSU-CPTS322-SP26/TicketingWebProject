@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap');
+
+/* =====================
+   MY BOOKINGS PAGE
+   ===================== */
+
+.mb-page {
+  min-height: 100vh;
+  background: #0d0d0d;
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- NAVBAR ---- */
+.mb-nav {
+  background: #111;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.mb-nav-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mb-nav-left,
+.mb-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex: 1;
+}
+
+.mb-nav-right { justify-content: flex-end; }
+
+.mb-nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.mb-nav-link:hover { color: #fff; }
+
+.mb-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  color: #fff;
+  transition: opacity 0.2s;
+  flex: 0;
+  white-space: nowrap;
+}
+.mb-logo:hover { opacity: 0.7; }
+
+.mb-nav-icon {
+  font-size: 16px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.55);
+  transition: color 0.2s;
+}
+.mb-nav-icon:hover { color: #fff; }
+
+/* ---- PAGE HEADER ---- */
+.mb-header {
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 48px 0 36px;
+}
+
+.mb-header-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.mb-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  letter-spacing: 6px;
+  margin: 0 0 8px;
+  line-height: 1;
+}
+
+.mb-sub {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.mb-user-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #141414;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 10px 16px;
+}
+
+.mb-user-icon { font-size: 16px; }
+
+.mb-user-name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ---- CONTENT ---- */
+.mb-content {
+  flex: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 48px 40px 64px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---- STATES ---- */
+.mb-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  gap: 16px;
+  text-align: center;
+}
+
+.mb-spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-top-color: #e63946;
+  border-radius: 50%;
+  animation: mbSpin 0.8s linear infinite;
+}
+
+@keyframes mbSpin {
+  to { transform: rotate(360deg); }
+}
+
+.mb-error {
+  font-size: 13px;
+  color: #e63946;
+  letter-spacing: 0.5px;
+}
+
+.mb-retry-btn {
+  background: transparent;
+  border: 1px solid rgba(230,57,70,0.4);
+  color: #e63946;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding: 10px 24px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.mb-retry-btn:hover { background: #e63946; color: #fff; }
+
+.mb-empty-icon { font-size: 48px; margin-bottom: 8px; }
+
+.mb-empty-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+  margin: 0;
+  color: rgba(255,255,255,0.4);
+}
+
+.mb-empty-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  max-width: 360px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.mb-browse-btn {
+  background: #e63946;
+  border: none;
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  padding: 12px 28px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+.mb-browse-btn:hover {
+  background: #ff4d5a;
+  transform: translateY(-1px);
+}
+
+/* ---- BOOKINGS LIST ---- */
+.mb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ---- BOOKING CARD ---- */
+.mb-card {
+  display: flex;
+  background: #141414;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.mb-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.mb-card--cancelled {
+  opacity: 0.6;
+}
+
+.mb-card--cancelled:hover {
+  transform: none;
+  border-color: rgba(255,255,255,0.07);
+}
+
+/* Poster */
+.mb-card-poster {
+  width: 160px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.mb-card-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.mb-cancelled-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #e63946;
+}
+
+/* Info */
+.mb-card-info {
+  flex: 1;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.mb-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.mb-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 3px;
+  margin: 0;
+  line-height: 1;
+}
+
+.mb-card-status {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid;
+  padding: 4px 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Details grid */
+.mb-card-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 24px;
+}
+
+.mb-detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mb-detail-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+}
+
+.mb-detail-value {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+}
+
+.mb-seats {
+  color: #e63946;
+  font-size: 12px;
+}
+
+/* Card footer */
+.mb-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 14px;
+}
+
+.mb-card-total {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #e63946;
+}
+
+.mb-cancel-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.4);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 8px 18px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.mb-cancel-btn:hover:not(:disabled) {
+  border-color: #e63946;
+  color: #e63946;
+}
+
+.mb-cancel-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .mb-card { flex-direction: column; }
+  .mb-card-poster { width: 100%; height: 180px; }
+  .mb-card-details { grid-template-columns: 1fr; }
+  .mb-header-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .mb-heading { font-size: 48px; }
+  .mb-content { padding: 32px 20px 48px; }
+  .mb-nav-inner { padding: 0 20px; }
+  .mb-header { padding: 36px 0 28px; }
+  .mb-header-inner { padding: 0 20px; }
+}

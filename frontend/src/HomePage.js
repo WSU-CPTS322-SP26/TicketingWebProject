@@ -1,8 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext';
-import LoginModal from './components/Auth/LoginModal';
-import RegisterModal from './components/Auth/RegisterModal';
 import './HomePage.css';
 import Footer from './Footer';
 import TickrAnimation from './TickrAnimation';
@@ -64,15 +61,14 @@ const menuLinks = [
   { label: 'Offers & Promotions', path: '/offers' },
   { label: 'Locations',           path: '/locations' },
   { label: 'Private Bookings',    path: '/private-booking' },
+  { label: 'My Bookings',         path: '/my-bookings' },
 ];
 
 const HomePage = () => {
   const [showAnimation, setShowAnimation] = useState(() => {
     return sessionStorage.getItem('animationPlayed') !== 'true';
   });
-  const [showMenu, setShowMenu]     = useState(false);
-  const [showLogin, setShowLogin]   = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   // Search state
   const [searchOpen, setSearchOpen]   = useState(false);
@@ -81,7 +77,24 @@ const HomePage = () => {
   const inputRef                      = useRef(null);
 
   const navigate = useNavigate();
-  const { logout, isAuthenticated } = useAuth();
+
+  // Get logged in user
+  const user = JSON.parse(localStorage.getItem('tickr_user') || '{}');
+
+  // Get initials from name
+  const getInitials = (name) => {
+    if (!name) return '?';
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  };
+
+  // Sign out
+  const handleSignOut = () => {
+    localStorage.removeItem('tickr_token');
+    localStorage.removeItem('tickr_user');
+    sessionStorage.removeItem('animationPlayed');
+    setShowMenu(false);
+    navigate('/auth');
+  };
 
   // Close search when clicking outside
   useEffect(() => {
@@ -126,24 +139,6 @@ const HomePage = () => {
     const scrollAmount = 790;
     if (direction === 'next') container.scrollLeft += scrollAmount;
     else container.scrollLeft -= scrollAmount;
-  };
-
-  const handleUserIconClick = () => {
-    if (isAuthenticated) {
-      logout();
-    } else {
-      setShowLogin(true);
-    }
-  };
-
-  const switchToRegister = () => {
-    setShowLogin(false);
-    setShowRegister(true);
-  };
-
-  const switchToLogin = () => {
-    setShowRegister(false);
-    setShowLogin(true);
   };
 
   const handleMenuNav = (path) => {
@@ -192,13 +187,36 @@ const HomePage = () => {
               Locations
             </div>
 
-            {/* User Icon */}
-            <div className="black-male-user" onClick={handleUserIconClick}>
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="8" r="4" stroke="white" strokeWidth="2"/>
-                <path d="M4 20C4 16.6863 6.68629 14 10 14H14C17.3137 14 20 16.6863 20 20" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-              {isAuthenticated && <span className="user-indicator">●</span>}
+            {/* User Icon — shows initials avatar if logged in */}
+            <div
+              className="black-male-user"
+              title={user.name ? `Logged in as ${user.name}` : 'My Account'}
+              style={{ cursor: 'pointer' }}
+            >
+              {user.name ? (
+                <div style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  background: '#e63946',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '13px',
+                  fontFamily: 'Bebas Neue, sans-serif',
+                  fontWeight: '700',
+                  letterSpacing: '1px',
+                  color: '#fff',
+                  flexShrink: 0,
+                }}>
+                  {getInitials(user.name)}
+                </div>
+              ) : (
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="8" r="4" stroke="white" strokeWidth="2"/>
+                  <path d="M4 20C4 16.6863 6.68629 14 10 14H14C17.3137 14 20 16.6863 20 20" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              )}
             </div>
 
             {/* Search Icon + Dropdown */}
@@ -337,6 +355,46 @@ const HomePage = () => {
           <div className={`menu-panel ${showMenu ? 'menu-panel--open' : ''}`}>
             <button className="menu-close" onClick={() => setShowMenu(false)}>✕</button>
             <div className="menu-logo">Tickr</div>
+
+            {/* User greeting in menu */}
+            {user.name && (
+              <div style={{
+                marginBottom: '24px',
+                padding: '12px 16px',
+                background: 'rgba(255,255,255,0.04)',
+                borderRadius: '3px',
+                border: '1px solid rgba(255,255,255,0.07)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+              }}>
+                <div style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  background: '#e63946',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '14px',
+                  fontFamily: 'Bebas Neue, sans-serif',
+                  letterSpacing: '1px',
+                  color: '#fff',
+                  flexShrink: 0,
+                }}>
+                  {getInitials(user.name)}
+                </div>
+                <div>
+                  <p style={{ margin: 0, fontSize: '10px', letterSpacing: '2px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase' }}>
+                    Signed in as
+                  </p>
+                  <p style={{ margin: '3px 0 0', fontSize: '14px', fontWeight: '600', color: '#fff', letterSpacing: '0.5px' }}>
+                    {user.name}
+                  </p>
+                </div>
+              </div>
+            )}
+
             <nav className="menu-links">
               {menuLinks.map((link, i) => (
                 <button
@@ -350,28 +408,14 @@ const HomePage = () => {
               ))}
             </nav>
             <div className="menu-divider" />
-            <button
-              className="menu-signin"
-              onClick={() => { setShowMenu(false); setShowLogin(true); }}
-            >
-              SIGN IN
+
+            {/* Sign Out button */}
+            <button className="menu-signin" onClick={handleSignOut}>
+              SIGN OUT
             </button>
+
             <p className="menu-footer-note">© 2025 Tickr. All rights reserved.</p>
           </div>
-
-          {/* Authentication Modals */}
-          {showLogin && (
-            <LoginModal
-              onClose={() => setShowLogin(false)}
-              onSwitchToRegister={switchToRegister}
-            />
-          )}
-          {showRegister && (
-            <RegisterModal
-              onClose={() => setShowRegister(false)}
-              onSwitchToLogin={switchToLogin}
-            />
-          )}
 
         </div>
       )}

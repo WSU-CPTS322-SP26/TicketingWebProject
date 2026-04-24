@@ -135,13 +135,15 @@ const SeatSelection = () => {
         return;
       }
 
+
       const bookingData = {
-        user:       { userId: user.userId },
-        showtime:   showtimeId ? { showtimeId } : null,
-        seatLabels: [...selected],
-        totalPrice,
-        status:     'confirmed',
+        user:        { userId: user.userId },
+        showtime:    showtimeId ? { showtimeId } : null,
+        totalAmount: totalPrice,
+        status:      'confirmed',
       };
+
+
 
       const res = await fetch(`${API_BASE}/api/user/bookings`, {
         method: 'POST',
