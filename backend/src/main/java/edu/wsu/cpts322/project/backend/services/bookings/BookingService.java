@@ -12,12 +12,12 @@ import edu.wsu.cpts322.project.backend.database.users.UsersEntity;
 import edu.wsu.cpts322.project.backend.database.users.UsersRepository;
 import edu.wsu.cpts322.project.backend.dto.bookings.BookingRequest;
 import edu.wsu.cpts322.project.backend.dto.bookings.BookingResponseDto;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -101,13 +101,16 @@ public class BookingService {
 
     @Transactional(readOnly = true)
     public List<BookingResponseDto> getBookingsForUser(Long userId) {
-        List<BookingEntity> bookings = bookingRepository.findByUser_UserId(userId);
+        // Use the JOIN FETCH query – all seat data is already loaded
+        List<BookingEntity> bookings = bookingRepository.findByUser_UserIdWithSeats(userId);
 
-        return bookings.stream().map(this::toDto).collect(Collectors.toList());
+        return bookings.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
     private BookingResponseDto toDto(BookingEntity b) {
-        List<String> seatLabels = b.getSeatLabels();    // safe here: still inside transaction
+        List<String> seatLabels = b.getSeatLabels();    // now safe – collection already initialized
 
         // Showtime may be null if it was set to null on delete (but normally not)
         String movieTitle = "";
