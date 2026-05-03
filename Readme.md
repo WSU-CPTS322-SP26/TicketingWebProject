@@ -205,7 +205,7 @@ This is caused by Supabase connection pooling limits. To run the backend without
 |----------|------|
 | Sprint 1 Report | [View](https://github.com/WSU-CPTS322-SP26/TicketingWebProject/blob/main/Sprint_reports/Sprint1_report.md) |
 | Sprint 2 Report | [View](https://github.com/WSU-CPTS322-SP26/TicketingWebProject/blob/main/Sprint_reports/Sprint2_report.md) |
-| Sprint 3 Report | [View](URL) |
+| Sprint 3 Report | [View](https://github.com/WSU-CPTS322-SP26/TicketingWebProject/blob/main/Sprint_reports/Sprint3_report.md) |
 | Sprint 1 Demo | https://youtu.be/IIk4GXUgsiA |
 | Sprint 2 Demo | https://youtu.be/Jx_9C3aeXBg |
 | Sprint 3 Demo | https://www.youtube.com/watch?v=aU3PJTz6XEg |
