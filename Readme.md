@@ -1,40 +1,66 @@
 # Tickr
 
-A full-stack web application for managing event tickets and bookings. Built with Spring Boot, React, and PostgreSQL (Supabase).
+A full-stack web application for browsing movies and booking cinema tickets. Built with Spring Boot, React, and PostgreSQL (Supabase).
 
-> Note: The project is in active development. See [Known Issues](#known-issues) for current limitations.
+> **Note:** The project is in active development. See [Known Issues](#known-issues) for current limitations.
+
+---
+
+## Table of Contents
+
+1. [Tech Stack](#tech-stack)
+2. [Prerequisites](#prerequisites)
+3. [Installation](#installation)
+   - [Clone the Repository](#1-clone-the-repository)
+   - [Backend Setup](#2-backend-setup)
+   - [Frontend Setup](#3-frontend-setup)
+   - [Seed the Database](#4-seed-the-database)
+4. [Development](#development)
+5. [Functionality](#functionality)
+6. [CI/CD](#cicd)
+7. [Known Issues](#known-issues)
+8. [Contributing](#contributing)
+9. [Troubleshooting](#troubleshooting)
+10. [Additional Documentation](#additional-documentation)
+11. [License](#license)
+
+---
 
 ## Tech Stack
 
-Backend
+**Backend**
 - Framework: Spring Boot 4.0.3
 - Language: Java 21
 - Database: PostgreSQL (Supabase)
 - ORM: Hibernate / Spring Data JPA
 
-Frontend
+**Frontend**
 - Framework: React 18
 - Build Tool: Vite
 - Node Version: 20
+
+---
 
 ## Prerequisites
 
 | Tool | Version |
 |------|---------|
-| [Git](https://git-scm.com/) | any |
-| [Java](https://www.oracle.com/java/technologies/downloads/) | 21+ |
-| [Node](https://nodejs.org/) | 20+ |
+| Git  | any     |
+| Java | 21+     |
+| Node | 20+     |
+
+---
 
 ## Installation
 
-Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/WSU-CPTS322-SP26/TicketingWebProject.git
 cd TicketingWebProject
 ```
 
-Backend Setup
+### 2. Backend Setup
 
 ```bash
 cd backend
@@ -55,9 +81,9 @@ Run the backend:
 ./mvnw spring-boot:run
 ```
 
-Backend runs on the local development server
+Backend runs on the local development server.
 
-Frontend Setup
+### 3. Frontend Setup
 
 ```bash
 cd ../frontend
@@ -65,9 +91,9 @@ npm install
 npm run dev
 ```
 
-Frontend runs on the local development server
+Frontend runs on the local development server.
 
-### Seed the Database
+### 4. Seed the Database
 
 Run these SQL scripts in your Supabase SQL Editor to populate test data:
 
@@ -97,75 +123,95 @@ INSERT INTO users (name, phone, email_id, password, role) VALUES
 '$2a$12$tqhHw4ngeuHxETb5VXrGsu1bNLuCxFdObp.E0n3DAMqyW3oevfmum', 'manager');
 ```
 
+---
+
 ## Development
 
+Run both servers simultaneously in two terminals:
+
 ```bash
-# Terminal 1 - Backend
+# Terminal 1 Backend
 cd backend && ./mvnw spring-boot:run
 
-# Terminal 2 - Frontend
+# Terminal 2 Frontend
 cd frontend && npm run dev
 ```
 
+---
+
 ## Functionality
 
-**Browse Movies** — The homepage displays currently showing movies in a scrollable carousel. Each movie card shows the poster, title, description, and a Book Now button.
+**Browse Movies** The homepage displays currently showing movies in a scrollable carousel. Each card shows the poster, title, description, and a Book Now button.
 
-**Booking Page** — Clicking Book Now on any movie takes you to the Booking Page, which shows movie details, a date selector (Friday through Wednesday), theaters with showtimes that update per selected date, and navigation to Seat Selection on clicking a showtime.
+**Booking Page** Clicking Book Now takes you to the Booking Page with movie details, a date selector (Friday through Wednesday), and theaters with showtimes that update per selected date.
 
-**Seat Selection** — A 10 x 14 seat grid with seat types (Available, Unavailable, Selected, Wheelchair). Click to select or deselect seats. A booking panel on the right shows cinema, date, time, selected seats, and total price. The Confirm Booking button activates once seats are selected.
+**Seat Selection** A 10x14 seat grid with four seat types: Available, Unavailable, Selected, and Wheelchair. Click to select or deselect. A booking panel on the right shows cinema, date, time, seats, and total price. Confirm Booking activates once seats are selected.
 
-**Offers & Promotions** — The homepage includes a promotions section with current deals including Student Saturdays, Group Bookings, and Snack & Save Combo.
+**Offers and Promotions** The homepage includes current deals: Student Saturdays, Group Bookings, and Snack and Save Combo.
 
-**Sign In** — Click the user icon in the navbar to open the sign-in modal and authenticate with your email and password.
+**Sign In** Click the user icon in the navbar to open the sign in modal and authenticate with email and password.
+
+---
 
 ## CI/CD
 
 The project uses GitHub Actions for automated testing and building.
 
-Required Secrets (GitHub Settings → Environments → Production):
-- `SUPABASE_DB_URL` - PostgreSQL JDBC URL
-- `SUPABASE_DB_USERNAME` - Database username
-- `SUPABASE_DB_PASSWORD` - Database password
+Required Secrets (GitHub Settings > Environments > Production):
+
+| Secret | Description |
+|--------|-------------|
+| `SUPABASE_DB_URL` | PostgreSQL JDBC URL |
+| `SUPABASE_DB_USERNAME` | Database username |
+| `SUPABASE_DB_PASSWORD` | Database password |
+
+---
 
 ## Known Issues
 
-1. Frontend is not fully integrated - React tests need initialization configuration
-2. Frontend not connected to backend - movie data is currently hardcoded in the frontend. Will be addressed in Sprint 3.
-3. Showtimes table empty - no showtime data has been seeded yet. Will be addressed in Sprint 3.
-4. Frontend CI failing - `package-lock.json` is out of sync with `package.json` (missing `yaml@2.8.3`). Run `npm install` in the frontend folder to fix.
-5. CORS and BCrypt PRs pending - pull requests #29 (CORS) and #32 (BCrypt) are open but not yet merged into main.
+* React tests need initialization configuration as the frontend is not fully tested
+* Frontend CI was failing due to package-lock.json being out of sync (missing yaml@2.8.3). Run npm install in the frontend folder if this occurs
+
+---
 
 ## Contributing
 
 1. Create a feature branch: `git checkout -b feature/your-feature`
-2. Commit changes: `git commit -m 'Add feature'`
+2. Commit your changes: `git commit -m 'Add feature'`
 3. Push and submit a pull request
 
-**Branch naming convention:** `sri/feature-name`, `param/feature-name`, etc.
-**Never push directly to main.** All changes must go through a pull request and be reviewed before merging.
+Branch naming convention: sri/feature-name, param/feature-name, raj/feature-name
 
-## Troubleshooting (Supabase Connection)
+Never push directly to main. All changes must go through a pull request and be reviewed before merging.
 
-If you encounter a database connection error such as "max clients reached", this is due to Supabase connection pooling limits. To run the backend locally for testing, you can start the application without database auto-configuration:
+---
+
+## Troubleshooting
+
+**Supabase "max clients reached" error**
+
+This is caused by Supabase connection pooling limits. To run the backend without a live database connection:
 
 ```bash
 ./mvnw spring-boot:run \
 -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 ```
 
-This allows the backend to start and be tested without requiring a live database connection.
+---
 
 ## Additional Documentation
 
-* [Sprint 1 Report](Sprint_reports/Sprint1_report.md)
-* [Sprint 2 Report](Sprint_reports/Sprint2_report.md)
+| Resource | Link |
+|----------|------|
+| Sprint 1 Report | [View](URL) |
+| Sprint 2 Report | [View](URL) |
+| Sprint 3 Report | [View](URL) |
+| Sprint 1 Demo | https://youtu.be/IIk4GXUgsiA |
+| Sprint 2 Demo | https://youtu.be/Jx_9C3aeXBg |
+| Sprint 3 Demo | https://www.youtube.com/watch?v=aU3PJTz6XEg |
 
-
-## Youtube Link
-- Sprint 1: https://youtu.be/IIk4GXUgsiA
-- Sprint 2: https://youtu.be/Jx_9C3aeXBg
+---
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE.txt).
