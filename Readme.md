@@ -203,8 +203,8 @@ This is caused by Supabase connection pooling limits. To run the backend without
 
 | Resource | Link |
 |----------|------|
-| Sprint 1 Report | [View](URL) |
-| Sprint 2 Report | [View](URL) |
+| Sprint 1 Report | [View](https://github.com/WSU-CPTS322-SP26/TicketingWebProject/blob/main/Sprint_reports/Sprint1_report.md) |
+| Sprint 2 Report | [View](https://github.com/WSU-CPTS322-SP26/TicketingWebProject/blob/main/Sprint_reports/Sprint2_report.md) |
 | Sprint 3 Report | [View](URL) |
 | Sprint 1 Demo | https://youtu.be/IIk4GXUgsiA |
 | Sprint 2 Demo | https://youtu.be/Jx_9C3aeXBg |
